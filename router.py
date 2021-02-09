@@ -6,3 +6,8 @@ class Router:
         self.brand = brand
         self.model = model
         self.hostname = hostname
+        self.interfaces = {}
+
+    def add_inf(self,interface_name):
+        if interface_name not in self.interfaces:
+            self.interfaces[interface_name]= "unassigned ip"
