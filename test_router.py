@@ -27,3 +27,12 @@ def test_add_inf():
 
     assert r1.interfaces == ['Gigabit 0/1','Gigabit 0/2','Gigabit 0/3'], "test failed"
     assert r2.interfaces == ['Gigabit 0/1'], "test failed"
+
+def test_remove_inf():
+    r1 = router.Router('Cisco', 'IOSv', 'R1')
+    r1.add_inf('Gigabit 0/1')
+    r1.add_inf('Gigabit 0/2')
+    r1.add_inf('Gigabit 0/3')
+    r1.remove_inf('Gigabit 0/1')
+
+    assert r1.interfaces == ['Gigabit 0/2','Gigabit 0/3'], "test failed"
