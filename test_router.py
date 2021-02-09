@@ -49,3 +49,20 @@ def test_show_inf():
     assert r1.show_infs() == "Show interface of R1\nR1 has 3 interfaces\nGigabit 0/1\nGigabit 0/2\nGigabit 0/3\n"
     assert r2.show_infs() == "Show interface of R2\nR2 has 1 interfaces\nGigabit 0/1\n"
     assert r3.show_infs() == "Show interface of R3\nR3 has 0 interfaces\n"
+
+def test_connect():
+    r1 = router.Router('Cisco', 'IOSv', 'R1')
+    r1.add_inf('Gigabit 0/1')
+    r1.add_inf('Gigabit 0/2')
+    r1.add_inf('Gigabit 0/3')
+    r2 = router.Router('Cisco', '3745', 'R2')
+    r2.add_inf('Gigabit 0/1')
+    r2.add_inf('Gigabit 0/2')
+    r3 = router.Router('Juniper', 'Mx5', 'R3')
+    r3.add_inf('Gigabit 0/1')
+
+    assert r1.connect('Gigabit 0/1', r2, 'Gigabit 0/2') == true, "test failed"
+    assert r1.connect('Gigabit 0/2', r3, 'Gigabit 0/1') == true, "test failed"
+    assert r1.connect('Gigabit 0/3', r3, 'Gigabit 0/1') == false, "test failed"
+    assert r3.connect('Gigabit 0/2', r1, 'Gigabit 0/3') == false, "test failed"
+    assert r2.connect('Gigabit 0/2', r1, 'Gigabit 0/3') == false, "test failed"
