@@ -15,3 +15,9 @@ class Router:
     def remove_inf(self,interface_name):
         if interface_name in self.interfaces:
             self.interfaces.remove(interface_name)
+
+    def show_infs(self):
+        output = "Show interface of " + self.hostname + "\n" + self.hostname + ' has ' + str(len(self.interfaces)) + ' interfaces\n'
+        for inf in self.interfaces:
+            output += inf+'\n'
+        return output
