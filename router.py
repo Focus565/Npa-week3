@@ -8,24 +8,28 @@ class Router:
         self.hostname = hostname
         self.interfaces = {}
 
+    """add interface"""
     def add_inf(self,interface_name):
         if interface_name not in self.interfaces:
             self.interfaces[interface_name] = "not connect"
             return True
         return False
 
+    "remove interface"
     def remove_inf(self,interface_name):
         if interface_name in self.interfaces:
             self.interfaces.pop(interface_name)
             return True
         return False
 
+    "show interface"
     def show_infs(self):
         output = "Show interface of " + self.hostname + "\n" + self.hostname + ' has ' + str(len(self.interfaces)) + ' interfaces\n'
         for inf in self.interfaces:
             output += inf+'\n'
         return output
 
+    "connect router"
     def connect(self, interface_name, target, target_interface_name):
         if interface_name in self.interfaces:
             if target_interface_name in target.interfaces:
