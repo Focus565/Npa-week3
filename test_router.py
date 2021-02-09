@@ -15,7 +15,6 @@ def test_init():
     assert r3.brand == 'Juniper', "test failed"
     assert r3.model == 'Mx5', "test failed"
     assert r3.hostname == 'R3', "test failed"
-
 def test_add_inf():
     r1 = router.Router('Cisco', 'IOSv', 'R1')
     r1.add_inf('Gigabit 0/1')
@@ -26,5 +25,5 @@ def test_add_inf():
     r2 = router.Router('Cisco', '3745', 'R2')
     r2.add_inf('Gigabit 0/1')
 
-    assert r1.interfaces == {'Gigabit 0/1':'unassigned ip','Gigabit 0/2':"unassigned ip",'Gigabit 0/3':'unassigned ip'}, "test failed"
-    assert r2.interfaces == {'Gigabit 0/1':'unassigned ip'}, "test failed"
+    assert r1.interfaces == ['Gigabit 0/1','Gigabit 0/2','Gigabit 0/3'], "test failed"
+    assert r2.interfaces == ['Gigabit 0/1'], "test failed"
