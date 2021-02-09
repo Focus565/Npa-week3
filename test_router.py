@@ -63,3 +63,24 @@ def test_connect():
     assert r1.connect('Gigabit 0/3', r3, 'Gigabit 0/1') == False, "test failed"
     assert r3.connect('Gigabit 0/2', r1, 'Gigabit 0/3') == False, "test failed"
     assert r2.connect('Gigabit 0/2', r3, 'Gigabit 0/2') == False, "test failed"
+
+def test_show_cdp():
+    r1 = router.Router('Cisco', 'IOSv', 'R1')
+    r1.add_inf('Gigabit 0/1')
+    r1.add_inf('Gigabit 0/2')
+    r1.add_inf('Gigabit 0/3')
+    r2 = router.Router('Cisco', '3745', 'R2')
+    r2.add_inf('Gigabit 0/1')
+    r2.add_inf('Gigabit 0/2')
+    r3 = router.Router('Juniper', 'Mx5', 'R3')
+    r3.add_inf('Gigabit 0/1')
+
+    r1.connect('Gigabit 0/1', r2, 'Gigabit 0/2')
+    r1.connect('Gigabit 0/2', r3, 'Gigabit 0/1')
+    r1.connect('Gigabit 0/3', r3, 'Gigabit 0/1')
+    r3.connect('Gigabit 0/2', r1, 'Gigabit 0/3')
+    r2.connect('Gigabit 0/2', r3, 'Gigabit 0/2')
+
+    assert r1.show_cdp() == "R1 interface Gigabit 0/1 connect to R2 on interface Gigabit 0/2\nR1 interface Gigabit 0/1 connect to R3 on interface Gigabit 0/1\n", "test failed"
+    assert r2.show_cdp() == "R2 interface Gigabit 0/2 connect to R2 on interface Gigabit 0/1\n", "test failed"
+    assert r3.show_cdp() == "R3 interface Gigabit 0/1 connect to R1 on interface Gigabit 0/2\n", "test failed"
