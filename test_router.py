@@ -81,6 +81,6 @@ def test_show_cdp():
     r3.connect('Gigabit 0/2', r1, 'Gigabit 0/3')
     r2.connect('Gigabit 0/2', r3, 'Gigabit 0/2')
 
-    assert r1.show_cdp() == "R1 interface Gigabit 0/1 connect to R2 on interface Gigabit 0/2\nR1 interface Gigabit 0/1 connect to R3 on interface Gigabit 0/1\n", "test failed"
-    assert r2.show_cdp() == "R2 interface Gigabit 0/2 connect to R2 on interface Gigabit 0/1\n", "test failed"
+    assert r1.show_cdp() == "R1 interface Gigabit 0/1 connect to R2 on interface Gigabit 0/2\nR1 interface Gigabit 0/2 connect to R3 on interface Gigabit 0/1\n", "test failed"
+    assert r2.show_cdp() == "R2 interface Gigabit 0/2 connect to R1 on interface Gigabit 0/1\n", "test failed"
     assert r3.show_cdp() == "R3 interface Gigabit 0/1 connect to R1 on interface Gigabit 0/2\n", "test failed"

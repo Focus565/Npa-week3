@@ -31,7 +31,15 @@ class Router:
             if target_interface_name in target.interfaces:
                 if self.interfaces[interface_name] == "not connect":
                     if target.interfaces[target_interface_name] == "not connect":
-                        self.interfaces[interface_name] = target.hostname+'_'+target_interface_name
-                        target.interfaces[target_interface_name] = self.hostname+'_'+interface_name
+                        self.interfaces[interface_name] = target.hostname+' on interface '+target_interface_name
+                        target.interfaces[target_interface_name] = self.hostname+' on interface '+interface_name
                         return True
         return False
+
+    def show_cdp(self):
+        output = ""
+        for interface in self.interfaces:
+            text = self.interfaces[interface]
+            if text != "not connect":
+                output += self.hostname+" interface "+interface+" connect to "+text+'\n'
+        return output
