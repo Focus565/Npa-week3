@@ -26,5 +26,5 @@ def test_add_inf():
     r2 = router.Router('Cisco', '3745', 'R2')
     r2.add_inf('Gigabit 0/1')
 
-    assert r1.interface == {'Gigabit 0/1':'unassigned ip','Gigabit 0/2';"unassigned ip",'Gigabit 0/3':'unassigned ip'}, "test failed"
-    assert r2.interface == {'Gigabit 0/1':'unassigned ip'}, "test failed"
+    assert r1.interfaces == {'Gigabit 0/1':'unassigned ip','Gigabit 0/2':"unassigned ip",'Gigabit 0/3':'unassigned ip'}, "test failed"
+    assert r2.interfaces == {'Gigabit 0/1':'unassigned ip'}, "test failed"
